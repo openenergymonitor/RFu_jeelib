@@ -6,17 +6,17 @@ The repo is for a modified version of the JeeLib RFM12B wireless radio driver fo
 The RFu is a tiny ATmega328 + RFM12B radio (SRF can also be used) in Xbee form factor. 
 <http://openmicros.org/index.php/articles/88-ciseco-product-documentation/236-rfu328-starter-guide> 
 
-**This library should be used at all times with the RFu V1.1.** 
+**THE STANDARD jeelib LIBRARY SHOULD NOT BE UPLOADED TO THE RFu V1.1** 
 
 If the standard JeeLib is uploaded to the RFu V1.1 it will enter a reset loop and serial upload will stop working. For technical explanation and method to recover from this see below.  
 
 ## Changes made the JeeLib library specific to the RFu V1.1 ##
 
-The library was renamed the RFu JeeLib to avoid confusion ans enable both to be installed in Arduino libraries folder. 
+The library was renamed to 'RFu_JeeLib' to avoid confusion with the unmodified 'jeelib'. This also enables both libraries to be installed in Arduino libraries folder. 
 
 ### The following changes where made to RF12.cpp ###
 
-RFM12B SS moved to Dig4/PD4 and INT moved to Dig3/INT1
+RFM12B SS moved to Dig4/PD4 and INT moved to Dig3/INT1:
 
 ```cpp
     #defined(CISECO_RFU)
@@ -37,10 +37,14 @@ RFM12B SS moved to Dig4/PD4 and INT moved to Dig3/INT1
         else
             detachInterrupt(1);
 ```
- 
-    rf12_xfer(0x90A2); // nINT,FAST,134kHz,0dBm,-91dBm - set nINT/VDI pin as output to stop it    interfering with RFu reset
 
-Explanation: The nINT/VDI pin (pad 11) on the RFM12B is connected to the Atmega328's RST line on the RFu V1.1. This is to allow OTA uploading when using an SRF. The nINT/VDI pin is set as input as default, when the RFM12B is initialised the standard JeeLib library sets it as output and drives it low resulting in the ATmega328 on the RFu getting stuck in a reset loop. In this state the ATmega328 on the RFu is unable accept serial upload. The only way to recover from this reset loop is to connect an ISP programmer and re-load the Arduino Uno bootloader.  
+Set nINT/VDI pin to always be an input:
+
+```cpp 
+    rf12_xfer(0x90A2); // nINT,FAST,134kHz,0dBm,-91dBm - set nINT/VDI pin as output to stop it    interfering with RFu reset
+```
+
+Explanation: The nINT/VDI pin (pad 11) on the RFM12B is connected to the Atmega328's RST line on the RFu V1.1. This is to allow OTA uploading when using an SRF radio. The nINT/VDI pin is set as input as default, when the RFM12B is initialised using the standard JeeLib library it sets nINT/VDI as output and drives it low resulting in the ATmega328 on the RFu getting stuck in a reset loop. In this state the ATmega328 on the RFu is unable accept a serial upload. The only way to recover from this reset loop is to connect the RFu to an ISP programmer and re-load the Arduino Uno bootloader.  
 
 
 #Many thanks to the hard work of JCW from jeelabs.org for the RFM12 driver:# 

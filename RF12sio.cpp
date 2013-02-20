@@ -1,7 +1,7 @@
 // Streaming I/O layer on top of RF12 driver
 // 2009-05-07 <jc@wippler.nl> http://opensource.org/licenses/mit-license.php
 
-#include <JeeLib.h>
+#include <RFu_JeeLib.h>
 #include <RF12sio.h>
 #if ARDUINO>=100
 #include <Arduino.h> // Arduino 1.0

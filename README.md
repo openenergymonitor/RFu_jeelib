@@ -1,7 +1,11 @@
 # Rfu JeeLib #
 
-The repo is for a modified version of the JeeLib RFM12B wireless radio driver for use with the Ciseco RFu V1.1 with an RFM12B.
 
+The repo is contains a modified version of the JeeLib RFM12B wireless radio driver for use with the Ciseco RFu V1.1 with an RFM12B.
+
+**For the emonTx V2.x and other current OpenEnergyMonitor hardwatre units use the unmodified JeeLib Library available here: <https://github.com/jcw/jeelib>**
+
+<br>
 
 The RFu is a tiny ATmega328 + RFM12B radio (SRF can also be used) in Xbee form factor. 
 <http://openmicros.org/index.php/articles/88-ciseco-product-documentation/236-rfu328-starter-guide> 

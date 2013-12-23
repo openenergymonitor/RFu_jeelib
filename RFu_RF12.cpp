@@ -358,7 +358,7 @@ static void rf12_recvStart () {
     rf12_xfer(RF_RECEIVER_ON);
 }
 
-#include <RF12.h> 
+#include <RFu_RF12.h> 
 #include <Ports.h> // needed to avoid a linker error :(
 
 byte rf12_recvDone();

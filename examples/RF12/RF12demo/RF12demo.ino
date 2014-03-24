@@ -4,7 +4,7 @@
 
 // this version adds flash memory support, 2009-11-19
 
-#include <JeeLib.h>
+#include <RFu_JeeLib.h>
 #include <util/crc16.h>
 #include <util/parity.h>
 #include <avr/eeprom.h>
